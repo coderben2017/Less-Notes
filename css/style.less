@@ -1,0 +1,103 @@
+/**
+ * 变量
+ */
+@bgColor: #F6F6D5;
+@headerHeight: 3em;
+
+body {
+  background-color: @bgColor;
+}
+
+header, .header {
+  height: @headerHeight;
+  line-height: @headerHeight;
+
+  box-shadow: .3rem .3rem .3rem #ccc;
+  border-radius: .3rem;
+  padding: .6rem;
+  background-color: #ddd;
+}
+
+/**
+ * 样式混入(Mixins)
+ */
+nav {
+  .header();
+  width: 20%;
+  min-width: 6rem;
+  height: 26rem;
+  margin-top: 1rem;
+  float: left;
+}
+
+/**
+ * 选择器嵌套
+ */ 
+article, .article {
+  .header();
+  width: 72%;
+  height: 23rem;
+  position: absolute;
+  float: left;
+  margin-left: 22%;
+  margin-top: 1rem;
+  padding: 2rem;
+  
+  .title {
+    text-align: center;
+  }
+
+  // & = current selector
+  .content {
+    text-indent: 2rem;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  // @media也可以嵌套
+  @media(max-width: 426px) {
+    width: 10rem;
+  }
+}
+
+/**
+ * 算术运算（+ - * /）
+ */
+@width-base: 100px;
+@width-sidebar: @width-base * 2;
+
+@color-base: #224488;
+@color-1: @color-base / 2;
+@color-2: @color-base + #111; // <=> #224488 + #111111 <=> #335599
+
+/**
+ * 访问器
+ */
+footer {
+  .header();
+  width: 99%;
+  height: 3rem;
+  float: left;
+  margin-left: 0;
+  margin-top: 1rem;
+  .article.title(); // 混入其他style set的某一选择器样式
+}
+
+/**
+ * 作用域
+ * less变量作用域范围是：与当前选择器同级的less变量
+ */
+@base-color: #ccc;
+.content {
+  @base-color: rgb(173, 144, 28);
+  p {
+    color: @base-color; // rgb(173, 144, 28)与选择器p同级，故字体颜色为rgb(173, 144, 28)
+  }
+}
+
+/**
+ * 导入
+ */
+@import 'style.css';
+@import 'style'; // 可以省略.less，同 @import 'style.less'
