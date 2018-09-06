@@ -85,6 +85,19 @@ footer {
 }
 
 /**
+ * 映射（Less3.5+）
+ */
+#colors() {
+  default: #000;
+  success: #0f0;
+  error: #f00;
+}
+button {
+  background-color: #colors[success];
+  border-color: #colors[default];
+}
+
+/**
  * 作用域
  * less变量作用域范围是：与当前选择器同级的less变量
  */
